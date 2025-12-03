@@ -254,6 +254,7 @@ export interface Field {
   expertConsultations?: { [key: string]: ExpertConsultation };
   aiConsultations?: { [key: string]: AIConsultation };
   alerts?: { [key: string]: Alert };
+  expertRequests?: { [key: string]: { expertId: string; expertName: string; status: string; requestedAt: string } };
   iot?: {
     deviceInfo: IoTDeviceInfo;
     sensorReadings?: { [key: string]: SensorReading };
