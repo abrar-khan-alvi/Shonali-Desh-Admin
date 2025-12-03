@@ -10,7 +10,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 
 interface LayoutProps {
   children: ReactNode;
@@ -20,8 +20,8 @@ const SidebarLink = ({ to, icon: Icon, label, active }: { to: string, icon: any,
   <Link
     to={to}
     className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors duration-200 ${active
-        ? 'bg-primary text-white'
-        : 'text-gray-400 hover:bg-gray-700 hover:text-white'
+      ? 'bg-primary text-white'
+      : 'text-gray-400 hover:bg-gray-700 hover:text-white'
       }`}
   >
     <Icon size={20} />
@@ -31,7 +31,13 @@ const SidebarLink = ({ to, icon: Icon, label, active }: { to: string, icon: any,
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAdmin');
+    navigate('/login');
+  };
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -81,7 +87,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <p className="text-gray-400 text-xs">Super Admin</p>
             </div>
           </div>
-          <button className="w-full flex items-center justify-center space-x-2 px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-colors text-sm font-medium">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center justify-center space-x-2 px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-colors text-sm font-medium"
+          >
             <LogOut size={16} />
             <span>Log Out</span>
           </button>

@@ -25,6 +25,8 @@ const transformFarmerData = (farmerId: string, data: any): Farmer => {
             aiConsultations: fieldData.AIConsultations || fieldData.aiConsultations,
             // Handle capitalized Alerts -> alerts
             alerts: fieldData.Alerts || fieldData.alerts,
+            // Handle capitalized ExpertRequests -> expertRequests
+            expertRequests: fieldData.ExpertRequests || fieldData.expertRequests,
             // Handle capitalized IoT with nested SensorReadings
             iot: fieldData.IoT || fieldData.iot ? {
                 deviceInfo: (fieldData.IoT || fieldData.iot).deviceInfo,
